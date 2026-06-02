@@ -18,19 +18,17 @@ exports.ApiError = ApiError;
 const errorHandler = (err, req, res, next) => {
     if (err instanceof ApiError) {
         return res.status(err.status).json({
-            error: {
-                code: err.code,
-                message: err.message,
-                details: err.details
-            }
+            status: err.status,
+            title: err.code,
+            detail: err.message,
+            errors: Array.isArray(err.details) ? err.details : undefined
         });
     }
     console.error("Unhandled error:", err);
     return res.status(500).json({
-        error: {
-            code: "INTERNAL_SERVER_ERROR",
-            message: "Неочікувана помилка на сервері"
-        }
+        status: 500,
+        title: "INTERNAL_SERVER_ERROR",
+        detail: "Неочікувана помилка на сервері"
     });
 };
 exports.errorHandler = errorHandler;

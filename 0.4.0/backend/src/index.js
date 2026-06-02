@@ -14,8 +14,18 @@ const categories_routes_1 = __importDefault(require("./routes/categories.routes"
 require("./db");
 const app = (0, express_1.default)();
 const PORT = 3000;
-// Дозволяємо запити з браузера
-app.use((0, cors_1.default)());
+// Express middleware та маршрути налаштовуються нижче
+// Дозволяємо запити з браузера з фронтенд-порту
+const corsOptions = {
+    origin: [
+        'http://localhost:5173',
+        'http://127.0.0.1:5173'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
+    optionsSuccessStatus: 200
+};
+app.use((0, cors_1.default)(corsOptions));
 // Парсинг JSON
 app.use(express_1.default.json());
 // Логування запитів
@@ -26,13 +36,20 @@ app.get('/health', (req, res) => {
 });
 // Підключення маршрутів для ПЗ
 app.use('/api/software', software_routes_1.default);
+app.use('/api/v1/software', software_routes_1.default);
 // Підключення маршрутів для користувачів
 app.use('/api/users', users_routes_1.default);
+app.use('/api/v1/users', users_routes_1.default);
 // Підключення маршрутів для категорій
 app.use('/api/categories', categories_routes_1.default);
+app.use('/api/v1/categories', categories_routes_1.default);
 // Обробка 404 (якщо маршрут не знайдений)
 app.use((req, res, next) => {
-    res.status(404).json({ error: { code: "NOT_FOUND", message: "Маршрут не знайдено" } });
+    res.status(404).json({
+        status: 404,
+        title: "NOT_FOUND",
+        detail: "Маршрут не знайдено"
+    });
 });
 // Централізований обробник помилок
 app.use(error_handler_middleware_1.errorHandler);

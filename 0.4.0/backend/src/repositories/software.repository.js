@@ -12,6 +12,7 @@ const uuid_1 = require("uuid");
 const db_1 = __importDefault(require("../db"));
 const ALLOWED_SORT_COLUMNS = new Set(['name', 'version', 'license', 'seats']);
 exports.softwareRepository = {
+    // Репозиторій для CRUD-операцій над таблицею software
     getAll: async (options) => {
         const where = [];
         const params = [];
@@ -39,6 +40,7 @@ exports.softwareRepository = {
         const row = stmt.get();
         return { total: row?.total || 0, sumSeats: row?.sumSeats || 0, avgSeats: row?.avgSeats || 0 };
     },
+    // Уразливий приклад пошуку, який показує ризик SQL ін'єкцій.
     searchUnsafe: async (q) => {
         const sql = `SELECT id, name, version, license, seats, comment, owner_id as ownerId, category_id as categoryId FROM software WHERE name LIKE '%${q}%' OR comment LIKE '%${q}%'`;
         const stmt = await db_1.default.prepare(sql);

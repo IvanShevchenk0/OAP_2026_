@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', softwareController.getAll);           // Отримати список
 router.get('/:id', softwareController.getById);       // Отримати один за ID
 router.get('/summary', softwareController.summary);   // Aggregation
-router.get('/search', softwareController.searchUnsafe); // Unsafe search (SQLi demo)
+router.get('/search', softwareController.searchUnsafe); // Небезпечний пошук (демонстрація SQL-ін'єкцій)
 router.post('/', softwareController.create);          // Створити
 router.put('/:id', softwareController.update);        // Оновити
 router.delete('/:id', softwareController.delete);     // Видалити

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.softwareController = void 0;
 const software_service_1 = require("../services/software.service");
 exports.softwareController = {
+    // Контролер для роботи з переліком програмного забезпечення
     // Отримати весь список (GET /api/software)
     getAll: async (req, res, next) => {
         try {
@@ -82,7 +83,7 @@ exports.softwareController = {
             next(err);
         }
     },
-    // Unsafe search (demonstration of SQLi)
+    // Небезпечний пошук (демонстрація SQL-ін'єкцій)
     searchUnsafe: async (req, res, next) => {
         try {
             const q = req.query.q || '';

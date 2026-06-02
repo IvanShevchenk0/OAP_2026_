@@ -36,7 +36,7 @@ export const softwareService = {
         return softwareRepository.getSummary();
     },
 
-    // Unsafe search delegated to repository (demonstration only)
+    // Небезпечний пошук через репозиторій (демонстрація SQL-ін'єкцій)
     searchUnsafe: async (q: string) => {
         return softwareRepository.searchUnsafe(q);
     },

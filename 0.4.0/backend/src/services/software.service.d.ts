@@ -1,4 +1,4 @@
-import { CreateSoftwareDto, UpdateSoftwareDto, Software } from '../dtos/software.dto';
+import { CreateSoftwareDto, UpdateSoftwareDto, Software } from '../../../shared/dtos';
 export declare const softwareService: {
     getAll: (query?: {
         license?: string;
@@ -7,7 +7,7 @@ export declare const softwareService: {
         sortBy?: string;
         sortOrder?: string;
     }) => Promise<{
-        items: Software[];
+        items: import("../dtos/software.dto").Software[];
         total: number;
     }>;
     getById: (id: string) => Promise<Software>;
@@ -16,7 +16,7 @@ export declare const softwareService: {
         sumSeats: any;
         avgSeats: any;
     }>;
-    searchUnsafe: (q: string) => Promise<Software[]>;
+    searchUnsafe: (q: string) => Promise<import("../dtos/software.dto").Software[]>;
     create: (dto: CreateSoftwareDto) => Promise<Software>;
     update: (id: string, dto: UpdateSoftwareDto) => Promise<Software>;
     delete: (id: string) => Promise<void>;

@@ -94,7 +94,7 @@ actionBtn.addEventListener('click', async () => {
     if (!isLoginMode) {
         // Створення нового користувача (Реєстрація)
         const name = loginNameInput.value.trim();
-        if (!name) return alert("Введіть ваше ім'я!");
+        if (!name) return alert("Введіть ваше ім'я!");;
 
         try {
             const response = await fetch(API_URL_USERS, {

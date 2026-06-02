@@ -79,7 +79,7 @@ export const softwareController = {
         }
     },
 
-    // Unsafe search (demonstration of SQLi)
+    // Небезпечний пошук (демонстрація SQL-ін'єкцій)
     searchUnsafe: async (req: Request, res: Response, next: NextFunction) => {
         try {
             const q = (req.query.q as string) || '';
